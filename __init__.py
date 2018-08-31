@@ -1,4 +1,9 @@
 import bpy
+import os
+
+# run from same dir as Blender file instead of app addons dir
+file = os.path.join(os.path.dirname(bpy.data.filepath), "addon.py")
+exec(compile(open(file)).read(), file, 'exec')
 
 bl_info = {
     'name': 'Example Addon',
@@ -9,19 +14,3 @@ bl_info = {
     'description': 'Demo of the structure of a Blender add-on',
     'category': 'Development'
 }
-
-class ExampleAddon (bpy.types.Operator):
-    bl_idname = 'object.example_addon'
-    bl_label = 'Object example addon'
-
-    def execute (self, ctx):
-        print("Running Example Addon!")
-        return {'FINISHED'}
-
-def register():
-    bpy.utils.register_class(ExampleAddon)
-
-def unregister():
-    bpy.utils.unregister_class(ExampleAddon)
-
-name == '__main__' and register()
